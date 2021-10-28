@@ -26,7 +26,7 @@ public class Normal extends Usuario{
     public Normal() {
     }
 
-    public Normal(String nombreCompleto, String correo, String contrasenia, String telefono, byte[] avatar, String ciudad, Date fechaNacimiento, Genero genero) {
+    public Normal(String nombreCompleto, String correo, String contrasenia, String telefono, byte[] avatar, String ciudad, Date fechaNacimiento, char genero) {
         super(nombreCompleto, correo, contrasenia, telefono, avatar, ciudad, fechaNacimiento, genero);
     }
 

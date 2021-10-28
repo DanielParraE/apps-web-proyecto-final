@@ -58,12 +58,12 @@ public class Usuario implements Serializable {
     protected Date fechaNacimiento;
     
     @Column(name="genero")
-    protected Genero genero;
+    protected char genero;
 
     public Usuario() {
     }
     
-    public Usuario(String nombreCompleto, String correo, String contrasenia, String telefono, byte[] avatar, String ciudad, Date fechaNacimiento, Genero genero) {
+    public Usuario(String nombreCompleto, String correo, String contrasenia, String telefono, byte[] avatar, String ciudad, Date fechaNacimiento, char genero) {
         this.nombreCompleto = nombreCompleto;
         this.correo = correo;
         this.contrasenia = contrasenia;
@@ -130,11 +130,11 @@ public class Usuario implements Serializable {
         this.fechaNacimiento = Date.valueOf(fechaNacimiento);
     }
 
-    public Genero getGenero() {
+    public char getGenero() {
         return genero;
     }
 
-    public void setGenero(Genero genero) {
+    public void setGenero(char genero) {
         this.genero = genero;
     }
 

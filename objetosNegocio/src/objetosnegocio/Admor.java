@@ -26,7 +26,7 @@ public class Admor extends Usuario{
     public Admor() {
     }
 
-    public Admor(String nombreCompleto, String correo, String contrasenia, String telefono, byte[] avatar, String ciudad, Date fechaNacimiento, Genero genero) {
+    public Admor(String nombreCompleto, String correo, String contrasenia, String telefono, byte[] avatar, String ciudad, Date fechaNacimiento, char genero) {
         super(nombreCompleto, correo, contrasenia, telefono, avatar, ciudad, fechaNacimiento, genero);
     }
     
