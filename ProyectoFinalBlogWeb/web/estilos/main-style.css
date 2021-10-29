@@ -10,12 +10,14 @@ body {
   padding: 20px;
   background-color: #333333;
 }
+
 aside {
   box-sizing: border-box;
   float: left;
   height: 100%;
   width: 20%;
 }
+
 .publication-container {
   box-sizing: border-box;
   float: left;
@@ -54,18 +56,75 @@ ul li {
   height: 100%;
   font-size: 24px;
 }
+
 .btnGreen {
+  transition-duration: 0.4s;
   background-color: #4caf50;
 }
+
 .btnBlue {
+  transition-duration: 0.4s;
   background-color: #008cba;
 }
+
 .btnRed {
+  transition-duration: 0.4s;
   background-color: #f44336;
 }
+
+.btnGreen:hover {
+  background-color: white;
+  border: solid;
+  border-width: 8px;
+  border-color: #4caf50;
+}
+
+.btnBlue:hover {
+  background-color: white;
+  border: solid;
+  border-width: 8px;
+  border-color: #008cba;
+}
+
+.btnRed:hover {
+  background-color: white;
+  border: solid;
+  border-width: 8px;
+  border-color: #f44336;
+}
+
+.btnGreen:active {
+  background-color: #4caf50;
+  border: solid;
+  border-top-width: 80px;
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.btnBlue:active {
+  background-color: #008cba;
+  border: solid;
+  border-width: 29px;
+  border-color: #008cba;
+  color: #008cba;
+}
+
+.btnRed:active {
+  background-color: #f44336;
+  border: solid;
+  border-left-width: 180px;
+  border-color: #f44336;
+  color: #f44336;
+}
+
+.publication:not(:first-child) {
+  margin-top: 10px;
+}
+
 .publication {
   height: 180px;
 }
+
 .message-container {
   height: 80%;
   box-sizing: border-box;
