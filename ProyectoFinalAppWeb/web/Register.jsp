@@ -1,7 +1,7 @@
 <%-- 
     Document   : Register
     Created on : 3 nov. 2021, 15:42:37
-    Author     : Daniel Parra
+    Author     : Equipo 2
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

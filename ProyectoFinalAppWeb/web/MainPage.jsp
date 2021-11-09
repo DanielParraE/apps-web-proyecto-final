@@ -24,7 +24,7 @@
                 </aside>
                 <section class="publication-container">
                     <div class="message-container">
-                        <h3>Ian:</h3>
+                        <h3>Ian Salas:</h3>
                         <p>
                             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                             Doloribus perspiciatis aperiam est sequi alias! Natus, dolorum qui
