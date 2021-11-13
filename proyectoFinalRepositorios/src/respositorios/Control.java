@@ -11,15 +11,15 @@ package respositorios;
  */
 public class Control {
     
-    AdmorRepository adr;
-    AncladoRepository acr;
-    ComentarioRepository comenr;
-    ComunRepository comunr;
-    NormalRepository nr;
-    PostRepository pr;
-    UsuarioRepository ur;
+    private static AdmorRepository adr;
+    private static AncladoRepository acr;
+    private static ComentarioRepository comenr;
+    private static ComunRepository comunr;
+    private static NormalRepository nr;
+    private static PostRepository pr;
+    private static UsuarioRepository ur;
     
-    public AdmorRepository getAdmorRepository() {
+    public static AdmorRepository getAdmorRepository() {
         if (adr == null) {
             adr = new AdmorRepository();
             return adr;
@@ -28,7 +28,7 @@ public class Control {
         }
     }
     
-    public AncladoRepository getAncladoRepository() {
+    public static AncladoRepository getAncladoRepository() {
         if (acr == null) {
             acr = new AncladoRepository();
             return acr;
@@ -37,7 +37,7 @@ public class Control {
         }
     }
     
-    public ComentarioRepository getComentarioRepository() {
+    public static ComentarioRepository getComentarioRepository() {
         if (comenr == null) {
             comenr = new ComentarioRepository();
             return comenr;
@@ -46,7 +46,7 @@ public class Control {
         }
     }
     
-    public ComunRepository getComunRepository() {
+    public static ComunRepository getComunRepository() {
         if (comunr == null) {
             comunr = new ComunRepository();
             return comunr;
@@ -55,7 +55,7 @@ public class Control {
         }
     }
     
-    public NormalRepository getNormalRepository() {
+    public static NormalRepository getNormalRepository() {
         if (nr == null) {
             nr = new NormalRepository();
             return nr;
@@ -64,7 +64,7 @@ public class Control {
         }
     }
     
-    public PostRepository getPostRepository() {
+    public static PostRepository getPostRepository() {
         if (pr == null) {
             pr = new PostRepository();
             return pr;
@@ -73,7 +73,7 @@ public class Control {
         }
     }
     
-    public UsuarioRepository getUsuarioRepository() {
+    public static UsuarioRepository getUsuarioRepository() {
         if (pr == null) {
             ur = new UsuarioRepository();
             return ur;

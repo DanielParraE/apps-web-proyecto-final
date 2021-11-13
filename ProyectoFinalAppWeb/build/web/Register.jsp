@@ -39,15 +39,15 @@
         <section id="form-container">
             <form action="ServletUsuario" method="POST" enctype="multipart/form-data">
                 <h3 class="tags">Username:</h3>
-                <input type="text" placeholder="Username here" name="username" />
+                <input type="text" placeholder="Username here" name="username" required="required" />
                 <h3 class="tags">Email:</h3>
-                <input type="text" placeholder="Email here" name="email" />
+                <input type="text" placeholder="Email here" name="email" required="required" />
                 <h3 class="tags">Password:</h3>
-                <input type="text" placeholder="Password here" name="password" />
+                <input type="text" placeholder="Password here" name="password" required="required" />
                 <h5 class="tags">Confirm Password:</h5>
-                <input type="text" name="confirmPassword" />
+                <input type="text" name="confirmPassword" required="required" />
                 <h3 class="tags">Birthday:</h3>
-                <input type="date" value="2021-01-01" name="birthday"/>
+                <input type="date" value="2021-01-01" name="birthday" required="required" />
                 <h3 class="tags">Gender:</h3>
                 <select name="gender">
                     <option value="F">Femenine</option>
@@ -55,7 +55,7 @@
                     <option value="O">Other</option>
                 </select>
                 <h3 class="tags">Avatar:</h3>
-                <input type="file" name="avatar" accept="image/*" />
+                <input type="file" name="avatar" accept="image/*" required="required" />
                 <p></p>
                 <button type="submit">Enter</button>
             </form>

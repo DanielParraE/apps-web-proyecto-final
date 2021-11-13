@@ -12,7 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import objetosnegocio.Normal;
 import objetosnegocio.Usuario;
 import respositorios.Control;
 
@@ -56,13 +55,11 @@ public class LoginServlet extends HttpServlet {
         
         Usuario user = null;
         
-        Control c = new Control();
-        
-        ArrayList<Usuario> usrs = c.getUsuarioRepository().consultarTodos();
+        ArrayList<Usuario> usrs = Control.getUsuarioRepository().consultarTodos();
         
         if (usernameLogin == null || passwordLogin == null || usernameLogin.isEmpty() || passwordLogin.isEmpty()) {
             
-            url = "/LogIn.html";
+            url = "./LogIn.html";
             message = "Campos no llenos.";
             
         } else {
@@ -73,13 +70,13 @@ public class LoginServlet extends HttpServlet {
                     
                     message = "Login exitoso.";
                     user = usuario;
-                    url = "/MainPage.jsp";
+                    url = "./ObtenerPostsServlet?action=\"join\"";
                     break;
                     
                 }
                 
                 message = "Usuario no existe.";
-                url = "/Register.jsp";
+                url = "./Register.jsp";
                 
                 
             }
@@ -92,7 +89,9 @@ public class LoginServlet extends HttpServlet {
         
         request.getSession().setAttribute("message", message);
         
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+        // getServletContext().getRequestDispatcher(url).forward(request, response);
+        
+        response.sendRedirect(url);
         
     }
 
@@ -104,6 +103,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -8,6 +8,22 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controladores.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ObtenerPostsServlet</servlet-name>
+        <servlet-class>controladores.ObtenerPostsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogutServlet</servlet-name>
+        <servlet-class>controladores.LogutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controladores.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MisPostsServlet</servlet-name>
+        <servlet-class>controladores.MisPostsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
         <url-pattern>/ServletUsuario</url-pattern>
@@ -15,6 +31,22 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ObtenerPostsServlet</servlet-name>
+        <url-pattern>/ObtenerPostsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogutServlet</servlet-name>
+        <url-pattern>/LogutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MisPostsServlet</servlet-name>
+        <url-pattern>/MisPostsServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

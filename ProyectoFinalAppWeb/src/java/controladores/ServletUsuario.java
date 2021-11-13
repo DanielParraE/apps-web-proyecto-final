@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import objetosnegocio.Normal;
+import objetosnegocio.Usuario;
 import respositorios.Control;
 
 /**
@@ -22,7 +24,7 @@ import respositorios.Control;
  */
 @MultipartConfig
 public class ServletUsuario extends HttpServlet {
-    
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -68,49 +70,69 @@ public class ServletUsuario extends HttpServlet {
                 || username.isEmpty() || email.isEmpty() || password.isEmpty() || birthday.isEmpty()) {
 
             message = "Rellena todos los campos.";
-            url = "/Register.jsp";
+            url = "./Register.jsp";
 
         } else {
 
             if (password.equals(confirmPassword)) {
 
-                InputStream fileContent = filePart.getInputStream();
-                ByteArrayOutputStream output = new ByteArrayOutputStream();
-                byte[] buffer = new byte[10240];
-                for (int length = 0; (length = fileContent.read(buffer)) > 0;) {
-                    output.write(buffer, 0, length);
-                }
-
-                byte[] image = output.toByteArray();
-
-                LocalDate bday = LocalDate.parse(birthday);
-
-                usr.setNombreCompleto(username);
-                usr.setCorreo(email);
-                usr.setContrasenia(password);
-                usr.setFechaNacimiento(bday);
-                usr.setGenero(genero);
-                usr.setAvatar(image);
-                usr.setTelefono(null);
-                usr.setCiudad(null);
+                boolean repetido = false;
+                ArrayList<Usuario> usuariosRegistrados = Control.getUsuarioRepository().consultarTodos();
                 
-                Control c = new Control();
-                c.getNormalRepository().guardar(usr);
+                for (Usuario ur : usuariosRegistrados) {
+                    if (ur.getNombreCompleto().equals(username)) {
+                        repetido = true;
+                        break;
+                    }
+                }
+                
+                if (!repetido) {
 
-                message = "Operacion realizada con exito.";
-                url = "/MainPage.jsp";
+                    InputStream fileContent = filePart.getInputStream();
+                    ByteArrayOutputStream output = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[10240];
+                    for (int length = 0; (length = fileContent.read(buffer)) > 0;) {
+                        output.write(buffer, 0, length);
+                    }
+
+                    byte[] image = output.toByteArray();
+
+                    LocalDate bday = LocalDate.parse(birthday);
+
+                    usr.setNombreCompleto(username);
+                    usr.setCorreo(email);
+                    usr.setContrasenia(password);
+                    usr.setFechaNacimiento(bday);
+                    usr.setGenero(genero);
+                    usr.setAvatar(image);
+                    usr.setTelefono(null);
+                    usr.setCiudad(null);
+                    
+                    Control.getNormalRepository().guardar(usr);
+
+                    message = "Operacion realizada con exito.";
+                    url = "./MainPage.jsp";
+
+                } else {
+                    
+                    message = "Nombre de usuario ya registrado.";
+                    url = "./Register.jsp";
+                    
+                }
 
             } else {
                 message = "Confirme bien su contrasenia.";
-                url = "/Register.jsp";
+                url = "./Register.jsp";
             }
 
         }
 
         request.setAttribute("message", message);
         request.setAttribute("user", usr);
+
+        //getServletContext().getRequestDispatcher(url).forward(request, response);
         
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+        response.sendRedirect(url);
 
 //        try (PrintWriter out = response.getWriter()) {
 //            out.println(username);
@@ -131,6 +153,6 @@ public class ServletUsuario extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
