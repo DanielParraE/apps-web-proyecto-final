@@ -9,174 +9,262 @@ and open the template in the editor.
 */
 
 body {
-  background-color: rgb(226, 226, 226);
-  margin: 50px 50px;
-  width: 80%;
-  height: 80%;
+    background-image: url(../imagenes/background.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    margin: auto;
+    margin-top: 50px;
+    max-width: 50%;
+    min-width: 600px;
+    height: auto;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /*overflow-y: auto;*/
 }
 
 .container-general {
-  height: 100%;
-  width: 860px;
-  padding: 20px;
-  background-color: #333333;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    background-color: #333333;
+    padding-bottom: 10px;
 }
 
 .main-header {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  background-color: dimgrey;
-  width: 100%;
-  height: 50px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #333333;
+    width: 100%;
+    height: 50px;
+    color: white;
+    border-bottom: solid #0d5a79;
+    z-index: 1;
+}
+
+.imagen-perfil {
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.imagen-logo {
+    position: fixed;
+    top: -10px;
+    width: 70px;
+    height: 70px;
 }
 
 .list-hdr {
-  display: flex;
-  flex-direction: row-reverse;
-  height: 50px;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 50px;
 }
 
 .list-hdr button {
-  height: 50px;
-  width: 150px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  background-color: dimgrey;
-  border: none;
+    height: 50px;
+    width: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    background-color: #333333;
+    border: none;
+    color: white;
 }
 
 .list-hdr button:hover {
-  transition-duration: 0.4s;
-  background-color: rgb(168, 168, 168);
-}
-
-#usuarioAvatar {
-    width: 100%;
-    height: auto;
-}
-
-aside {
-  box-sizing: border-box;
-  float: left;
-  height: 100%;
-  width: 20%;
+    transition-duration: 0.4s;
+    background-color: rgb(168, 168, 168);
 }
 
 .publication-container {
-  box-sizing: border-box;
-  float: left;
-  width: 80%;
-  height: 100%;
-  border: solid;
-  border-color: rgb(124, 124, 124);
-  background-color: rgb(96, 141, 185);
+    box-sizing: border-box;
+    float: left;
+    width: 100%;
+    height: 100%;
+    border: solid;
+    border-color: rgb(124, 124, 124);
+    border-radius: 20px;
+    background-color: rgb(71, 123, 175);
+}
+
+.title-list {
+    display: flex;
+    list-style: none;
+    height: 30px;
+    margin-bottom: 0px;
+}
+
+.title-list li {
+    flex: 1;
+}
+
+.title-list :first-child {
+    flex: 3;
 }
 
 .input-container {
-  box-sizing: border-box;
-  height: 20%;
+    box-sizing: border-box;
+    height: 20%;
 }
 
 .input-comentario {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  padding-right: 0;
-  padding-left: 0;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  height: 100%;
-  margin: 0;
-}
-ul li {
-  height: 33.33%;
-  margin: 0%;
-}
-.publication button {
-  border: none;
-  width: 100%;
-  height: 100%;
-  font-size: 24px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    border: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
-.btnGreen {
-  transition-duration: 0.1s;
-  background-color: #4caf50;
+.escribe-comentario {
+    box-sizing: border-box;
+    float: left;
+    width: 95%;
+    height: 100%;
+    margin: 0px;
 }
 
-.btnBlue {
-  transition-duration: 0.1s;
-  background-color: #008cba;
+.btn-comentario {
+    position: sticky;
+    width: 2.45%;
+    min-width: 30px;
+    height: 35px;
+    background-color: rgb(71, 123, 175);
+    border: solid rgb(71, 123, 175);
+    border-bottom-right-radius: 20px;
+    z-index: 0;
 }
 
-.btnRed {
-  transition-duration: 0.1s;
-  background-color: #f44336;
+.btn-comentario img {
+    position: relative;
+    left: -8px;
+    top: -5px;
+    width: 35px;
+    height: 35px;
 }
 
-.btnGreen:hover {
-  background-color: #333333;
-  border: solid;
-  border-width: 8px;
-  border-color: #4caf50;
-  color: white;
+.container-comentarios {
+    box-sizing: border-box;
+    background-color: rgb(168, 168, 168);
+    width: 100%;
+    height: auto;
+    min-height: 40px;
+    border-radius: 20px;
 }
 
-.btnBlue:hover {
-  background-color: #333333;
-  border: solid;
-  border-width: 8px;
-  border-color: #008cba;
-  color: white;
+.comentario {
+    height: auto;
+    max-height: 60px;
+    font-size: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-top: 10px;
+    overflow: auto;
 }
 
-.btnRed:hover {
-  background-color: #333333;
-  border: solid;
-  border-width: 8px;
-  border-color: #f44336;
-  color: white;
+.comentario::-webkit-scrollbar {
+    display: none;
 }
 
-.btnGreen:active {
-  background-color: #4caf50;
-  /*border: solid;
-  border-top-width: 80px;
-  border-color: #4caf50;
-  color: #4caf50;*/
+.comentario h3 {
+    position: relative;
+    top: 5px;
 }
-
-.btnBlue:active {
-  background-color: #008cba;
-  /*border: solid;
-  border-width: 29px;
-  border-color: #008cba;
-  color: #008cba;*/
-}
-
-.btnRed:active {
-  background-color: #f44336;
-  /*border: solid;
-  border-left-width: 180px;
-  border-color: #f44336;
-  color: #f44336;*/
-}
-
-.publication:not(:first-child) {
-  margin-top: 10px;
-}
-
-.publication {
-  height: 180px;
+.comentario p {
+    position: relative;
+    bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .message-container {
-  height: 80%;
-  box-sizing: border-box;
-  padding: 10px;
+    overflow: auto;
 }
 
+.message-container::-webkit-scrollbar {
+    display: none;
+}
+
+.message-container p,
+h3,
+h4 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    height: 100%;
+    margin: 0;
+    margin-right: 25px;
+}
+
+aside ul li {
+    width: 50%;
+    height: 30px;
+    margin: 0%;
+}
+
+.btnGreen {
+    position: relative;
+    left: 110px;
+    top: 50px;
+    transition-duration: 0.2s;
+    background-color: #4caf50;
+    border: none;
+    width: auto;
+    height: 60px;
+    width: 80%;
+    margin: auto;
+    font-size: 24px;
+    border-radius: 40px;
+    border-color: #4caf50;
+}
+
+.btnGreen:hover {
+    background-color: #33333300;
+    border: solid;
+    border-width: 8px;
+    border-color: #4caf50;
+}
+
+.btnRed {
+    height: 30px;
+    width: 210%;
+    border: none;
+    border-radius: 20px;
+    transition-duration: 0.4s;
+    background-color: #f44336;
+}
+
+
+.btnRed:hover {
+    background-color: #ca0404;
+}
+
+.btnGreen:active {
+    transition-duration: 0.3s;
+    background-color: #4caf50;
+    /*border: solid;
+    border-top-width: 80px;
+    border-color: #4caf50;
+    color: #4caf50;*/
+}
+
+.publication:not(:first-child) {
+    margin-top: 10px;
+}
+
+.publication {
+    height: 180px;
+}
+
+.message-container {
+    height: 80%;
+    box-sizing: border-box;
+    padding: 10px;
+}

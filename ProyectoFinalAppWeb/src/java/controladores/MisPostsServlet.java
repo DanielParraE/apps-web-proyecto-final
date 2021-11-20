@@ -12,10 +12,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import objetosnegocio.Admor;
 import objetosnegocio.Anclado;
+import objetosnegocio.Comentario;
 import objetosnegocio.Comun;
-import objetosnegocio.Post;
 import objetosnegocio.Usuario;
 import respositorios.Control;
 
@@ -39,27 +38,23 @@ public class MisPostsServlet extends HttpServlet {
 
         //ArrayList<Post> allPosts = Control.getPostRepository().consultarTodos();
         //Collections.reverse(allPosts);
-        ArrayList<Post> misPosts = new ArrayList<>();
+        ArrayList<Anclado> misPostsAnclados = new ArrayList<>();
+        ArrayList<Comun> misPostsComunes = new ArrayList<>();
 
+        boolean esAdmin = (Boolean) request.getSession().getAttribute("esAdmin");
         Usuario usr = (Usuario) request.getSession().getAttribute("user");
 
         String nombre = usr.getNombreCompleto();
 
-//        for (Admor admin : administradores) {
-//            if (admin.getNombreCompleto().equals(nombre)) {
-//                esNormal = false;
-//            }
-//        }
-//        if (esNormal) {
         ArrayList<Anclado> postsAnclados = Control.getAncladoRepository().consultarTodos();
 
         Collections.reverse(postsAnclados);
 
-        for (Anclado postsAnclado : postsAnclados) {
-            if (postsAnclado.getAdministrador().getNombreCompleto().equals(nombre)) {
-
-                misPosts.add(postsAnclado);
-
+        if (esAdmin) {
+            for (Anclado postAnclado : postsAnclados) {
+                if (postAnclado.getAdministrador().getNombreCompleto().equals(nombre)) {
+                    misPostsAnclados.add(postAnclado);
+                }
             }
         }
 
@@ -69,29 +64,14 @@ public class MisPostsServlet extends HttpServlet {
 
         for (Comun post : postsComunes) {
             if (post.getUsuario().getNombreCompleto().equals(nombre)) {
-                misPosts.add(post);
+                misPostsComunes.add(post);
             }
         }
-//        } else {
 
-//        }
-        request.getSession().setAttribute("misPosts", misPosts);
+        request.getSession().setAttribute("misPostsAnclados", misPostsAnclados);
+        request.getSession().setAttribute("misPostsComunes", misPostsComunes);
 
         response.sendRedirect("./Home.jsp");
-
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
 
     }
 

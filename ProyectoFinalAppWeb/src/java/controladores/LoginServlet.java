@@ -22,20 +22,6 @@ import respositorios.Control;
 public class LoginServlet extends HttpServlet {
 
     /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
-
-    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -50,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         String usernameLogin = request.getParameter("username-login");
         String passwordLogin = request.getParameter("password-login");
         
-        String message = "";
+        boolean esAdmin = false;
         String url = "";
         
         Usuario user = null;
@@ -60,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         if (usernameLogin == null || passwordLogin == null || usernameLogin.isEmpty() || passwordLogin.isEmpty()) {
             
             url = "./LogIn.html";
-            message = "Campos no llenos.";
+            // Campos no llenos
             
         } else {
             
@@ -68,14 +54,18 @@ public class LoginServlet extends HttpServlet {
                 
                 if (usuario.getNombreCompleto().equals(usernameLogin) && usuario.getContrasenia().equals(passwordLogin)) {
                     
-                    message = "Login exitoso.";
+                    if ((Control.getAdmorRepository().buscarPorId(usuario.getId())) != null) {
+                        esAdmin = true;
+                    }
+                    
+                    // Login exitoso
                     user = usuario;
-                    url = "./ObtenerPostsServlet?action=\"join\"";
+                    url = "./ObtenerPostsServlet";
                     break;
                     
                 }
                 
-                message = "Usuario no existe.";
+                // Usuario no existe
                 url = "./Register.jsp";
                 
                 
@@ -85,9 +75,8 @@ public class LoginServlet extends HttpServlet {
         
         if (user != null) {
             request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("esAdmin", esAdmin);
         }
-        
-        request.getSession().setAttribute("message", message);
         
         // getServletContext().getRequestDispatcher(url).forward(request, response);
         

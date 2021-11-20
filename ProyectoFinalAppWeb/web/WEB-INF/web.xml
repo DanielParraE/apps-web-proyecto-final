@@ -24,6 +24,26 @@
         <servlet-name>MisPostsServlet</servlet-name>
         <servlet-class>controladores.MisPostsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ComentarServlet</servlet-name>
+        <servlet-class>controladores.ComentarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AgregarPostServlet</servlet-name>
+        <servlet-class>controladores.AgregarPostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ModificarPostServlet</servlet-name>
+        <servlet-class>controladores.ModificarPostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostrarPostModificarServlet</servlet-name>
+        <servlet-class>controladores.MostrarPostModificarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarPostServlet</servlet-name>
+        <servlet-class>controladores.EliminarPostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
         <url-pattern>/ServletUsuario</url-pattern>
@@ -47,6 +67,26 @@
     <servlet-mapping>
         <servlet-name>MisPostsServlet</servlet-name>
         <url-pattern>/MisPostsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ComentarServlet</servlet-name>
+        <url-pattern>/ComentarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregarPostServlet</servlet-name>
+        <url-pattern>/AgregarPostServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ModificarPostServlet</servlet-name>
+        <url-pattern>/ModificarPostServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostrarPostModificarServlet</servlet-name>
+        <url-pattern>/MostrarPostModificarServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarPostServlet</servlet-name>
+        <url-pattern>/EliminarPostServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

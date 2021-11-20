@@ -7,10 +7,13 @@ package controladores;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import objetosnegocio.Anclado;
+import objetosnegocio.Comentario;
 import objetosnegocio.Comun;
 import respositorios.Control;
 
@@ -31,30 +34,29 @@ public class ObtenerPostsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         
+        // Obtiene todos los posrs anclados.
+        ArrayList<Anclado> postsAncladosRegistrados = Control.getAncladoRepository().consultarTodos();
+        Collections.reverse(postsAncladosRegistrados);
+        
+        // Obtiene todos los posts comunes.
         ArrayList<Comun> postsComunesRegistrados = Control.getComunRepository().consultarTodos();
+        Collections.reverse(postsComunesRegistrados);
         
+        // Obtiene todos los comentarios.
+        ArrayList<Comentario> cmts = Control.getComentarioRepository().consultarTodos();
+        Collections.reverse(cmts);
+        
+        // Mete los posts a la sesion.
         request.getSession().setAttribute("postsComunes", postsComunesRegistrados);
+        request.getSession().setAttribute("postsAnclados", postsAncladosRegistrados);
+        
+        // Mete los comentarios a la sesion.
+        request.getSession().setAttribute("cmts", cmts);
         
         response.sendRedirect("./MainPage.jsp");
         
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //processRequest(request, response);
-    }
-
     /**
      * Returns a short description of the servlet.
      *
