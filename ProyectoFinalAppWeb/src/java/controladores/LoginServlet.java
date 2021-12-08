@@ -5,6 +5,8 @@
  */
 package controladores;
 
+import com.google.gson.Gson;
+import entidades.UsuarioFix;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -21,6 +23,44 @@ import respositorios.Control;
  */
 public class LoginServlet extends HttpServlet {
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        String usernameLogin = req.getParameter("username-login");
+        String passwordLogin = req.getParameter("password-login");
+        
+        Usuario user = null;
+        boolean esAdmin = false;
+        
+        ArrayList<Usuario> usrs = Control.getUsuarioRepository().consultarTodos();
+        
+        if (!(usernameLogin == null || passwordLogin == null || usernameLogin.isEmpty() || passwordLogin.isEmpty())) {
+            for (Usuario usuario : usrs) {
+                if (usuario.getNombreCompleto().equals(usernameLogin) && usuario.getContrasenia().equals(passwordLogin)) {
+                    if ((Control.getAdmorRepository().buscarPorId(usuario.getId())) != null) {
+                        esAdmin = true;
+                    }
+                    
+                    // Login exitoso
+                    user = usuario;
+                    break;   
+                }
+            }
+        }
+        
+        UsuarioFix usuarioJson = new UsuarioFix(user, esAdmin);
+        
+        Gson gson = new Gson();
+        resp.setContentType("application/json");
+        
+        try (PrintWriter out = resp.getWriter()) {
+            out.write(gson.toJson(usuarioJson));
+        }
+        
+    }
+
+    
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -32,55 +72,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String usernameLogin = request.getParameter("username-login");
-        String passwordLogin = request.getParameter("password-login");
-        
-        boolean esAdmin = false;
-        String url = "";
-        
-        Usuario user = null;
-        
-        ArrayList<Usuario> usrs = Control.getUsuarioRepository().consultarTodos();
-        
-        if (usernameLogin == null || passwordLogin == null || usernameLogin.isEmpty() || passwordLogin.isEmpty()) {
-            
-            url = "./LogIn.html";
-            // Campos no llenos
-            
-        } else {
-            
-            for (Usuario usuario : usrs) {
-                
-                if (usuario.getNombreCompleto().equals(usernameLogin) && usuario.getContrasenia().equals(passwordLogin)) {
-                    
-                    if ((Control.getAdmorRepository().buscarPorId(usuario.getId())) != null) {
-                        esAdmin = true;
-                    }
-                    
-                    // Login exitoso
-                    user = usuario;
-                    url = "./ObtenerPostsServlet";
-                    break;
-                    
-                }
-                
-                // Usuario no existe
-                url = "./Register.jsp";
-                
-                
-            }
-            
-        }
-        
-        if (user != null) {
-            request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("esAdmin", esAdmin);
-        }
-        
-        // getServletContext().getRequestDispatcher(url).forward(request, response);
-        
-        response.sendRedirect(url);
         
     }
 

@@ -5,7 +5,11 @@
  */
 package controladores;
 
+import com.google.gson.Gson;
+import entidades.ComentarioFix;
+import entidades.PostFix;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.servlet.ServletException;
@@ -35,25 +39,21 @@ public class MisPostsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        boolean esAdmin = Boolean.valueOf(request.getParameter("esAdmin"));
 
-        //ArrayList<Post> allPosts = Control.getPostRepository().consultarTodos();
-        //Collections.reverse(allPosts);
-        ArrayList<Anclado> misPostsAnclados = new ArrayList<>();
-        ArrayList<Comun> misPostsComunes = new ArrayList<>();
-
-        boolean esAdmin = (Boolean) request.getSession().getAttribute("esAdmin");
-        Usuario usr = (Usuario) request.getSession().getAttribute("user");
-
-        String nombre = usr.getNombreCompleto();
+        String nombre = request.getParameter("nombreUsuario");
 
         ArrayList<Anclado> postsAnclados = Control.getAncladoRepository().consultarTodos();
 
         Collections.reverse(postsAnclados);
 
+        ArrayList<PostFix> postsAncladosRegistradosCopy = new ArrayList<>();
+        
         if (esAdmin) {
             for (Anclado postAnclado : postsAnclados) {
                 if (postAnclado.getAdministrador().getNombreCompleto().equals(nombre)) {
-                    misPostsAnclados.add(postAnclado);
+                    postsAncladosRegistradosCopy.add(new PostFix(postAnclado));
                 }
             }
         }
@@ -62,17 +62,36 @@ public class MisPostsServlet extends HttpServlet {
 
         Collections.reverse(postsComunes);
 
+        ArrayList<PostFix> postsComunesRegistradosCopy = new ArrayList<>();
+        
         for (Comun post : postsComunes) {
             if (post.getUsuario().getNombreCompleto().equals(nombre)) {
-                misPostsComunes.add(post);
+                postsComunesRegistradosCopy.add(new PostFix(post));
             }
         }
-
-        request.getSession().setAttribute("misPostsAnclados", misPostsAnclados);
-        request.getSession().setAttribute("misPostsComunes", misPostsComunes);
-
-        response.sendRedirect("./Home.jsp");
-
+        
+        // Obtiene todos los comentarios.
+        ArrayList<Comentario> cmts = Control.getComentarioRepository().consultarTodos();
+        Collections.reverse(cmts);
+        
+        ArrayList<ComentarioFix> cmtsCopy = new ArrayList<>();
+        
+        for (Comentario cmt : cmts) {
+            cmtsCopy.add(new ComentarioFix(cmt));
+        }
+        
+        // agrega todas las listas en una lista para mandar en formato JSON
+        ArrayList<Object> listas = new ArrayList<>();
+        listas.add(postsComunesRegistradosCopy);
+        listas.add(cmtsCopy);
+        listas.add(postsAncladosRegistradosCopy);
+        
+        Gson gson = new Gson();
+        response.setContentType("application/json");
+        
+        try (PrintWriter out = response.getWriter()) {
+            out.write(gson.toJson(listas));
+        }
     }
 
     /**

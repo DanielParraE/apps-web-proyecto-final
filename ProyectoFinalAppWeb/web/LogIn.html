@@ -8,6 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="utf-8" />
         <title>Login</title>
+        <script src="./js/LogInJS.js"></script>
         <style>
             .tags {
                 margin: 5px 0px 5px 0px;
@@ -35,13 +36,13 @@ and open the template in the editor.
     </head>
     <body>
         <section id="form-section">
-            <form action="LoginServlet" method="POST">
+            <form id="frmLogIn" action="#" method="POST">
                 <h3 class="tags">Username:</h3>
-                <input type="text" placeholder="Username here" name="username-login" required="required" />
+                <input id="nombreCompletoLog" type="text" placeholder="Username here" name="username-login" required="required" />
                 <h3 class="tags">Password:</h3>
-                <input type="text" placeholder="Password here" name="password-login" required="required" />
+                <input id="contraseniaLog" type="text" placeholder="Password here" name="password-login" required="required" />
                 <p></p>
-                <button type="submit">Enter</button>
+                <button id="logear" type="submit">Enter</button>
             </form>
         </section>
     </body>

@@ -25,7 +25,7 @@
                 text-align: center;
                 margin: 60px 42%;
                 width: 300px;
-                height: 450px;
+                height: 600px;
                 background-color: gray;
                 border: solid;
                 border-color: honeydew;
@@ -34,30 +34,37 @@
                 margin-top: 15px;
             }
         </style>
+        <script src="./js/RegisterJS.js"></script>
     </head>
     <body>
         <section id="form-container">
-            <form action="ServletUsuario" method="POST" enctype="multipart/form-data">
+            <form id="formRegister" action="#" method="POST" enctype="multipart/form-data">
                 <h3 class="tags">Username:</h3>
-                <input type="text" placeholder="Username here" name="username" required="required" />
+                <input id="nombreUsr" type="text" placeholder="Username here" name="username" required="required" />
                 <h3 class="tags">Email:</h3>
-                <input type="text" placeholder="Email here" name="email" required="required" />
+                <input id="emailUsr" type="text" placeholder="Email here" name="email" required="required" />
                 <h3 class="tags">Password:</h3>
-                <input type="text" placeholder="Password here" name="password" required="required" />
+                <input id="passwordUsr" type="text" placeholder="Password here" name="password" required="required" />
                 <h5 class="tags">Confirm Password:</h5>
-                <input type="text" name="confirmPassword" required="required" />
+                <input id="confPassUsr" type="text" name="confirmPassword" required="required" />
+                <h5 class="tags">Telefono:</h5>
+                <input id="telephoneUsr" type="text" name="telephone" required="required" />
                 <h3 class="tags">Birthday:</h3>
-                <input type="date" value="2021-01-01" name="birthday" required="required" />
+                <input id="bithdayUsr" type="date" value="2021-01-01" name="birthday" required="required" />
                 <h3 class="tags">Gender:</h3>
-                <select name="gender">
+                <select id="genderUsr" name="gender">
                     <option value="F">Femenine</option>
                     <option value="M">Masculine</option>
                     <option value="O">Other</option>
                 </select>
+                <h3 class="tags">Estado:</h3>                            
+                <select id="cmbEstado" name="estado"></select><br />
+                <h3 class="tags">Municipio</h3>                            
+                <select id="cmbMunicipio" name="municipio"></select><br />
                 <h3 class="tags">Avatar:</h3>
-                <input type="file" name="avatar" accept="image/*" required="required" />
+                <input id="profilePicUsr" type="file" name="avatar" accept="image/*" required="required" />
                 <p></p>
-                <button type="submit">Enter</button>
+                <button id="btnSubir" type="submit">Enter</button>
             </form>
         </section>
     </body>

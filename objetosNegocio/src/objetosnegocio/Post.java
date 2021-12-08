@@ -54,6 +54,10 @@ public class Post implements Serializable {
         this.fechaHoraEdicion = fechaHoraEdicion;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getId() {
         return id;
     }

@@ -1,10 +1,17 @@
 package controladores;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import entidades.ComentarioFix;
+import entidades.UsuarioFix;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -35,96 +42,47 @@ public class ServletUsuario extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
 
-        String message;
-        String url;
-        Normal usr = new Normal();
+        String url = "";
 
-        String username = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
-        String birthday = request.getParameter("birthday");
-        char genero = request.getParameter("gender").charAt(0);
-        Part filePart = request.getPart("avatar"); // Retrieves <input type="file" name="avatar">
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        //String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-        if (username == null || email == null || password == null || birthday == null || filePart == null
-                || username.isEmpty() || email.isEmpty() || password.isEmpty() || birthday.isEmpty()) {
+        String json = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+        UsuarioFix uf = gson.fromJson(json, UsuarioFix.class);
 
-            message = "Rellena todos los campos.";
-            url = "./Register.jsp";
+        Normal usr = uf.toNormal();
+        
+        System.out.println(usr.getFechaNacimiento());
+        
+        usr.setAvatar(Base64.getDecoder().decode(uf.getAvatar()));
+        
+        if (uf.getContrasenia().equals(uf.getConfCon())) {
 
-        } else {
+            boolean repetido = false;
+            ArrayList<Usuario> usuariosRegistrados = Control.getUsuarioRepository().consultarTodos();
 
-            if (password.equals(confirmPassword)) {
-
-                boolean repetido = false;
-                ArrayList<Usuario> usuariosRegistrados = Control.getUsuarioRepository().consultarTodos();
-                
-                for (Usuario ur : usuariosRegistrados) {
-                    if (ur.getNombreCompleto().equals(username)) {
-                        repetido = true;
-                        break;
-                    }
+            for (Usuario ur : usuariosRegistrados) {
+                if (ur.getNombreCompleto().equals(uf.getNombreCompleto())) {
+                    repetido = true;
+                    break;
                 }
-                
-                if (!repetido) {
+            }
 
-                    InputStream fileContent = filePart.getInputStream();
-                    ByteArrayOutputStream output = new ByteArrayOutputStream();
-                    byte[] buffer = new byte[10240];
-                    for (int length = 0; (length = fileContent.read(buffer)) > 0;) {
-                        output.write(buffer, 0, length);
-                    }
-
-                    byte[] image = output.toByteArray();
-
-                    LocalDate bday = LocalDate.parse(birthday);
-
-                    usr.setNombreCompleto(username);
-                    usr.setCorreo(email);
-                    usr.setContrasenia(password);
-                    usr.setFechaNacimiento(bday);
-                    usr.setGenero(genero);
-                    usr.setAvatar(image);
-                    usr.setTelefono(null);
-                    usr.setCiudad(null);
-                    
-                    Control.getNormalRepository().guardar(usr);
-
-                    message = "Operacion realizada con exito.";
-                    url = "./MainPage.jsp";
-
-                } else {
-                    
-                    message = "Nombre de usuario ya registrado.";
-                    url = "./Register.jsp";
-                    
-                }
+            if (!repetido) {
+                Control.getNormalRepository().guardar(usr);
+                url = "./MainPage.jsp";
 
             } else {
-                message = "Confirme bien su contrasenia.";
                 url = "./Register.jsp";
             }
 
         }
-
-        request.setAttribute("message", message);
-        request.setAttribute("user", usr);
-
-        //getServletContext().getRequestDispatcher(url).forward(request, response);
         
-        response.sendRedirect(url);
+        response.setContentType("application/json");
 
-//        try (PrintWriter out = response.getWriter()) {
-//            out.println(username);
-//            out.println(email);
-//            out.println(password);
-//            out.println(confirmPassword);
-//            out.println(genero);
-//            out.println(Arrays.toString(image));
-//        } catch (Exception e) {
-//        }
+        try (PrintWriter out = response.getWriter()) {
+            out.write(gson.toJson(url));
+        }
+        
     }
 
     /**

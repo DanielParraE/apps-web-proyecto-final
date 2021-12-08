@@ -5,8 +5,14 @@
  */
 package controladores;
 
+import com.google.gson.Gson;
+import entidades.ComentarioFix;
+import entidades.PostFix;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +28,7 @@ import respositorios.Control;
  * @author Daniel Parra
  */
 public class ComentarServlet extends HttpServlet {
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -35,23 +41,28 @@ public class ComentarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        int idpost = Integer.valueOf(request.getParameter("idpostcomentar"));
-        Usuario usrTemp = (Usuario) request.getSession().getAttribute("user");
-        String contenido = request.getParameter("comentarioContenido");
+        String json = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         
-        Normal nrm = Control.getNormalRepository().buscarPorId(usrTemp.getId());
-        Comun postComun = Control.getComunRepository().buscarPorId(idpost);
+        Gson gson = new Gson();
+        ComentarioFix cf = gson.fromJson(json, ComentarioFix.class);
         
+        Normal nrm = Control.getNormalRepository().buscarPorId(cf.getUsrFix().getId());
+        Comun postComun = Control.getComunRepository().buscarPorId(cf.getIdPost());
+
         Comentario cmt = new Comentario();
-        cmt.setFechaHora(LocalDateTime.now());
+        cmt.setContenido(cf.getContenido());
         cmt.setUsuarioNormal(nrm);
-        cmt.setContenido(contenido);
         cmt.setPostComun(postComun);
+        cmt.setFechaHora(LocalDateTime.now());
         
         Control.getComentarioRepository().guardar(cmt);
-        
-        response.sendRedirect("./ObtenerPostsServlet");
-        
+
+        response.setContentType("application/json");
+
+        try (PrintWriter out = response.getWriter()) {
+            out.write(gson.toJson(new ComentarioFix(cmt)));
+        }
+
     }
 
     /**

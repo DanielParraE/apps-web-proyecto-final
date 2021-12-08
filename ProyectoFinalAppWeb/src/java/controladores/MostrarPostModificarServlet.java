@@ -5,15 +5,17 @@
  */
 package controladores;
 
+import com.google.gson.Gson;
+import entidades.PostFix;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import objetosnegocio.Anclado;
 import objetosnegocio.Comun;
-import objetosnegocio.Post;
 import respositorios.Control;
 
 /**
@@ -33,31 +35,38 @@ public class MostrarPostModificarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Comun postComun = Control.getComunRepository().buscarPorId(Integer.valueOf(request.getParameter("idpost")));
-        String url;
+        String json = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+
+        Gson gson = new Gson();
+        PostFix pf = gson.fromJson(json, PostFix.class);
         
+        Comun postComun = Control.getComunRepository().buscarPorId(pf.getId());
         
         if(postComun != null) {
             
-            String nombreAutor = postComun.getUsuario().getNombreCompleto();
-            request.getSession().setAttribute("postmodify", postComun);
-            request.getSession().setAttribute("postmodifyautor", nombreAutor);
-            url = "./Edit.jsp";
+            response.setContentType("application/json");
+            
+            try (PrintWriter out = response.getWriter()) {
+                out.write(gson.toJson(new PostFix(postComun)));
+            }
             
         } else {
             
-            Anclado postAnclado = Control.getAncladoRepository().buscarPorId(Integer.valueOf(request.getParameter("idpost")));
+            Anclado postAnclado = Control.getAncladoRepository().buscarPorId(pf.getId());
             
-            String nombreAutor = postAnclado.getAdministrador().getNombreCompleto();
-            request.getSession().setAttribute("postmodify", postAnclado);
-            request.getSession().setAttribute("postmodifyautor", nombreAutor);
+            response.setContentType("application/json");
             
-            url = "./Edit.jsp";
+            try (PrintWriter out = response.getWriter()) {
+                out.write(gson.toJson(new PostFix(postAnclado)));
+            }
             
         }
         
-        response.sendRedirect(url);
-        
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp); //To change body of generated methods, choose Tools | Templates.
     }
     
     /**

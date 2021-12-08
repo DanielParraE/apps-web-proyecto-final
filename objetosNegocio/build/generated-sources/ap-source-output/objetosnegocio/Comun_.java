@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import objetosnegocio.Comentario;
 import objetosnegocio.Usuario;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-10-28T11:41:21")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2021-12-06T15:03:05")
 @StaticMetamodel(Comun.class)
 public class Comun_ extends Post_ {
 

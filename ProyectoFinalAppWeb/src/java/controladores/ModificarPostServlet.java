@@ -5,13 +5,19 @@
  */
 package controladores;
 
+import com.google.gson.Gson;
+import entidades.PostFix;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import objetosnegocio.Anclado;
+import objetosnegocio.Comun;
 import objetosnegocio.Post;
 import respositorios.Control;
 
@@ -33,21 +39,45 @@ public class ModificarPostServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String idPostModificar = request.getParameter("idpost");
-        int idPost = Integer.valueOf(idPostModificar);
+        String json = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+
+        Gson gson = new Gson();
         
-        Post postModificar = Control.getPostRepository().buscarPorId(idPost);
+        PostFix pf = gson.fromJson(json, PostFix.class);
         
-        String titulo = request.getParameter("titulo");
-        String contenido = request.getParameter("contenido");
+        Anclado postA = Control.getAncladoRepository().buscarPorId(pf.getId());
+
+        if (postA != null) {
+            
+            postA.setContenido(pf.getContenido());
+            postA.setFechaHoraEdicion(Timestamp.valueOf(LocalDateTime.now()));
+            postA.setTitulo(pf.getTitulo());
+            
+            Control.getAncladoRepository().actualizar(postA);
+            
+            response.setContentType("application/json");
+            
+            try (PrintWriter out = response.getWriter()) {
+                out.write(gson.toJson(new PostFix(postA)));
+            }
+
+        } else {
+            Comun post = Control.getComunRepository().buscarPorId(pf.getId());
+            
+            post.setContenido(pf.getContenido());
+            post.setFechaHoraEdicion(Timestamp.valueOf(LocalDateTime.now()));
+            post.setTitulo(pf.getTitulo());
+            
+            Control.getComunRepository().actualizar(post);
+            
+            response.setContentType("application/json");
+            
+            try (PrintWriter out = response.getWriter()) {
+                out.write(gson.toJson(new PostFix(post)));
+            }
+            
+        }
         
-        postModificar.setTitulo(titulo);
-        postModificar.setContenido(contenido);
-        postModificar.setFechaHoraEdicion(Timestamp.valueOf(LocalDateTime.now()));
-        
-        Control.getPostRepository().actualizar(postModificar);
-        
-        response.sendRedirect("./MisPostsServlet");
         
     }
 
