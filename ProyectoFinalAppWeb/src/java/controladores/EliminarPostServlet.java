@@ -5,7 +5,10 @@
  */
 package controladores;
 
+import com.google.gson.Gson;
+import entidades.PostFix;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,11 +35,19 @@ public class EliminarPostServlet extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        Post postEliminar = Control.getPostRepository().buscarPorId(Integer.valueOf(request.getParameter("idpost")));
+        Gson gson = new Gson();
         
-        Control.getPostRepository().eliminar(postEliminar.getId());
+        //Post postEliminar = Control.getPostRepository().buscarPorId();
         
-        response.sendRedirect("./ObtenerPostsServlet");
+        Control.getPostRepository().eliminar(Integer.valueOf(request.getParameter("idpost")));
+        
+        response.setContentType("application/json");
+            
+            try (PrintWriter out = response.getWriter()) {
+                out.write(gson.toJson("confirmao"));
+            }
+        
+        // response.sendRedirect("./ObtenerPostsServlet");
         
     }
 

@@ -35,7 +35,7 @@ class DisplayUserData {
 
         if (page === 'MainPage.jsp') {
             if (sessionStorage.getItem('usr')) {
-                document.getElementById("nombrePresentacion").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+                document.getElementById("nombreuser").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
             } else {
                 document.getElementById("idBotonAgregarPost").style.display = 'none';
             }
@@ -50,8 +50,10 @@ class DisplayUserData {
         } else if (page === 'Agregar.jsp') {
 
             if (sessionStorage.getItem('usr')) {
-                document.getElementById("idBotonAgregarPost").style.display = 'none';
+                
                 document.getElementById("nombrePostUsuario").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            } else {
+                document.getElementById("btnSubmitPost").style.display = 'none';
             }
             this.agregarPost();
         } else if (page === 'Edit.jsp') {

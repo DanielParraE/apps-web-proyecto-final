@@ -290,7 +290,7 @@ class DisplayAllPosts {
 
                 containerPost.appendChild(messageContainer);
                 containerPost.style.padding = "5px 0px 5px 0px";
-                
+
                 containerSingle.appendChild(containerPost);
 
                 if (sessionStorage.getItem('usr')) {
@@ -326,7 +326,7 @@ class DisplayAllPosts {
 
                     }
                 }
-                
+
                 document.getElementById("containerGeneralDeAnclados").appendChild(containerSingle);
 
             }
@@ -384,9 +384,8 @@ class DeletePost {
                 .then(response => response.json())
                 .then(data => {
                     alert("Post Eliminado");
-                }).then(() => {
-            window.location.reload();
-        })
+                    window.location.reload();
+                })
                 .catch(exception => console.log(exception));
 
     }

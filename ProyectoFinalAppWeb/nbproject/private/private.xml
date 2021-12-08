@@ -3,16 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/DisplayMyPosts.js</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/src/java/entidades/UsuarioFix.java</file>
             <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/DisplayUserData.js</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/src/java/controladores/MisPostsServlet.java</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/styles/home-style.css</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/MainPage.jsp</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/Home.jsp</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/LogIn.html</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/LogInJS.js</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/DisplayMyPosts.js</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/Agregar.jsp</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/src/java/controladores/AgregarPostServlet.java</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/AddPost.js</file>
             <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/src/java/controladores/LoginServlet.java</file>
-            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/src/java/controladores/ObtenerPostsServlet.java</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/EditPostJS.js</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/RegisterJS.js</file>
+            <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/src/java/controladores/EliminarPostServlet.java</file>
             <file>file:/C:/Users/Daniel%20Parra/Documents/5to%20Semestre/Apps%20Web/ProyectoFinal-Ver2/ProyectoFinal-Equipo2/ProyectoFinalAppWeb/web/js/DisplayAllPosts.js</file>
         </group>
     </open-files>

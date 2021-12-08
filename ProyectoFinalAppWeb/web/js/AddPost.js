@@ -13,11 +13,10 @@ class AddPost {
             if (JSON.parse(sessionStorage.getItem('usr')).esAdmin === false) {
                 document.getElementById("tipoPost").style.display = 'none';
             }
-            document.getElementById("form-post").onsubmit = this.agregarPos
+            document.getElementById("form-post").onsubmit = this.agregarPost;
         } else {
             document.getElementById("form-post").style.display = 'none';
         }
-        t;
     }
 
     agregarPost(evt) {

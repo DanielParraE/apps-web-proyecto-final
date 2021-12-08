@@ -64,7 +64,13 @@ public class AgregarPostServlet extends HttpServlet {
         } else {
             Comun post = new Comun(Timestamp.valueOf(LocalDateTime.now()), pf.getTitulo(), pf.getContenido(), null);
             
-            post.setUsuario(Control.getUsuarioRepository().buscarPorId(pf.getUsrFix().getId()));
+            System.out.println(pf.getUsrFix().getId());
+            
+            Usuario us=Control.getUsuarioRepository().buscarPorId(pf.getUsrFix().getId());
+            
+            System.out.println(us);
+            
+            post.setUsuario(us);
             Control.getComunRepository().guardar(post);
             
             response.setContentType("application/json");
