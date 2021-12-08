@@ -31,19 +31,33 @@ class DisplayUserData {
             document.getElementById("logOutUser").style.display = 'none';
             document.getElementById("nombreuser").style.display = 'none';
             document.getElementById("avatarUsuarioContenedor").style.display = 'none';
-            document.getElementById("idBotonAgregarPost").style.display = 'none';
         }
 
         if (page === 'MainPage.jsp') {
+            if (sessionStorage.getItem('usr')) {
+                document.getElementById("nombrePresentacion").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            } else {
+                document.getElementById("idBotonAgregarPost").style.display = 'none';
+            }
             this.despliegaPosts();
         } else if (page === 'Home.jsp') {
-            document.getElementById("nombrePresentacion").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            if (sessionStorage.getItem('usr')) {
+                document.getElementById("nombrePresentacion").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            } else {
+                document.getElementById("idBotonAgregarPost").style.display = 'none';
+            }
             this.despliegaMisPosts();
         } else if (page === 'Agregar.jsp') {
-            document.getElementById("nombrePostUsuario").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+
+            if (sessionStorage.getItem('usr')) {
+                document.getElementById("idBotonAgregarPost").style.display = 'none';
+                document.getElementById("nombrePostUsuario").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            }
             this.agregarPost();
         } else if (page === 'Edit.jsp') {
-            document.getElementById("nombrePostUsuario").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            if (sessionStorage.getItem('usr')) {
+                document.getElementById("nombrePostUsuario").innerHTML = JSON.parse(sessionStorage.getItem('usr')).nombreCompleto;
+            }
             this.editarPost();
         }
 
@@ -56,7 +70,7 @@ class DisplayUserData {
         script.src = './js/DisplayAllPosts.js';
         head.appendChild(script);
     }
-    
+
     despliegaMisPosts() {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
@@ -64,7 +78,7 @@ class DisplayUserData {
         script.src = './js/DisplayMyPosts.js';
         head.appendChild(script);
     }
-    
+
     agregarPost() {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
@@ -72,7 +86,7 @@ class DisplayUserData {
         script.src = './js/AddPost.js';
         head.appendChild(script);
     }
-    
+
     editarPost() {
         var head = document.getElementsByTagName('head')[0];
         var script = document.createElement('script');
